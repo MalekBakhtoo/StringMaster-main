@@ -6,7 +6,7 @@ public class A_CharAndString {
      * @return a string instance of given character array
      */
     public static String chArrToString(char[] chArr) {
-        return null;
+        return new String(chArr);
     }
 
     /**
@@ -16,6 +16,7 @@ public class A_CharAndString {
      * @return the ascii code of the given character
      */
     public static int asciiCode(char ch) {
-        return -1;
+        return (int)ch;
+
     }
 }

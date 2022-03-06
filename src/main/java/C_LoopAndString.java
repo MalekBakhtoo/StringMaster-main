@@ -11,6 +11,13 @@ public class C_LoopAndString {
      * the given character
      */
     public static boolean containsDoubleChar(String s, char ch) {
+        for (int i=0 ; i<s.length() ; i++ ){
+            if ((int)s.toCharArray()[i] ==(int)ch){
+                if ( s.toCharArray()[i+1] == ch){
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -24,7 +31,31 @@ public class C_LoopAndString {
      * @param offset shift amount
      */
     public static String caesarEncrypt(String s, int offset) {
-        return null;
+        String uPer  ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String loWer ="abcdefghijklmnopqrstuvwxyz";
+        StringBuilder changedstr = new StringBuilder();
+
+        for (int i=0 ; i<s.length() ; i++){
+            if ((int) s.toCharArray()[i] < 90 && s.toCharArray()[i] !=' ' ){
+                int i1 = uPer.indexOf(s.toCharArray()[i]) + offset;
+                if ( i1 < uPer.length()) {
+                    changedstr.append(uPer.toCharArray()[i1]);
+                }
+                else {
+                    changedstr.append(uPer.toCharArray()[offset-1]);
+                }
+            }
+            if ((int) s.toCharArray()[i] > 90 && s.toCharArray()[i] !=' ' ){
+                int i1 = loWer.indexOf(s.toCharArray()[i]) + offset;
+                if ( i1 < loWer.length()) {
+                    changedstr.append(loWer.toCharArray()[i1]);
+                }
+                else{
+                    changedstr.append(loWer.toCharArray()[offset - 1]);
+                }
+            }
+        }
+        return String.valueOf(changedstr);
     }
 
     /**
