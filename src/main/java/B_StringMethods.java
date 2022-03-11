@@ -9,8 +9,13 @@ public class B_StringMethods {
      * @return the full name
      */
     public static String fullName(String firstName, String lastName) {
+        if (firstName !="" && lastName !=""){
+            return firstName +" " + lastName;
+        }else if(firstName != ""){return firstName;}
+        else if (lastName != ""){return lastName;}
+        else {return "";}
 
-        return firstName + lastName;
+
     }
 
     /**
@@ -44,7 +49,7 @@ public class B_StringMethods {
      */
     public static String firstWord(String wordA, String wordB) {
         int compared = wordA.compareTo(wordB);
-        if (compared >= 0){
+        if (compared <= 0){
             return wordA;
         }
         return wordB;

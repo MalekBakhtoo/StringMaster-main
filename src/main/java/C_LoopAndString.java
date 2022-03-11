@@ -11,9 +11,9 @@ public class C_LoopAndString {
      * the given character
      */
     public static boolean containsDoubleChar(String s, char ch) {
-        for (int i=0 ; i<s.length() ; i++ ){
-            if ((int)s.toCharArray()[i] ==(int)ch){
-                if ( s.toCharArray()[i+1] == ch){
+        for (int i=0 ; i<s.length()-1 ; i++ ){
+            if ((int)s.charAt(i) ==(int)ch){
+                if ((int) s.charAt(i+1) ==(int) ch){
                     return true;
                 }
             }
@@ -31,32 +31,49 @@ public class C_LoopAndString {
      * @param offset shift amount
      */
     public static String caesarEncrypt(String s, int offset) {
-        String uPer  ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String loWer ="abcdefghijklmnopqrstuvwxyz";
-        StringBuilder changedstr = new StringBuilder();
 
-        for (int i=0 ; i<s.length() ; i++){
-            if ((int) s.toCharArray()[i] < 90 && s.toCharArray()[i] !=' ' ){
-                int i1 = uPer.indexOf(s.toCharArray()[i]) + offset;
-                if ( i1 < uPer.length()) {
-                    changedstr.append(uPer.toCharArray()[i1]);
+            int ascOfch
+                    ;
+            StringBuilder output = new StringBuilder();
+
+            char changed;
+
+            for (int i = 0; i < s.length(); i++) {
+                ascOfch = s.charAt(i);
+
+                if (ascOfch == 44) {
+                    output.append(",");
+                } else if (ascOfch == 32) {
+                    output.append(" ");
+                } else if (ascOfch == 46) {
+                    output.append(".");
+                } else if (ascOfch >= 97) {
+                    ascOfch += offset;
+                    while (ascOfch > 122) {
+                        ascOfch -= 26;
+                    }
+                    while (ascOfch < 97) {
+                        ascOfch += 26;
+                    }
+                    changed = (char) ascOfch;
+                    output.append(changed);
+                } else {
+                    if (ascOfch <= 90) {
+                        ascOfch += offset;
+                        while (ascOfch > 90) {
+                            ascOfch -= 26;
+                        }
+                        while (ascOfch < 65) {
+                            ascOfch += 26;
+                        }
+                        changed = (char) ascOfch;
+                        output.append(changed);
+                    }
                 }
-                else {
-                    changedstr.append(uPer.toCharArray()[offset-1]);
-                }
+
             }
-            if ((int) s.toCharArray()[i] > 90 && s.toCharArray()[i] !=' ' ){
-                int i1 = loWer.indexOf(s.toCharArray()[i]) + offset;
-                if ( i1 < loWer.length()) {
-                    changedstr.append(loWer.toCharArray()[i1]);
-                }
-                else{
-                    changedstr.append(loWer.toCharArray()[offset - 1]);
-                }
-            }
+            return output.toString();
         }
-        return String.valueOf(changedstr);
-    }
 
     /**
      * <p>Implement Caesar cipher decryption algorithm (tag: cryptography)</p>
@@ -68,8 +85,47 @@ public class C_LoopAndString {
      * @param c shift amount
      */
     public static String caesarDecrypt(String s, int c) {
-        return null;
-    }
+
+            int ascOfch;
+            StringBuilder output = new StringBuilder();
+            char chanGed;
+            for (int i = 0; i < s.length(); i++) {
+
+
+                ascOfch = s.charAt(i);
+
+                if (ascOfch == 44) {
+                    output.append(",");
+                } else if (ascOfch == 32) {
+                    output.append(" ");
+                } else if (ascOfch == 46) {
+                    output.append(".");
+                } else if (ascOfch >= 97) {
+                    ascOfch -= c;
+                    while (ascOfch > 122) {
+                        ascOfch -= 26;
+                    }
+                    while (ascOfch < 97) {
+                        ascOfch += 26;
+                    }
+                    chanGed = (char) ascOfch;
+                    output.append(chanGed);
+                } else {
+                    if (ascOfch <= 90) {
+                        ascOfch -= c;
+                        while (ascOfch > 90) {
+                            ascOfch -= 26;
+                        }
+                        while (ascOfch < 65) {
+                            ascOfch += 26;
+                        }
+                        chanGed = (char) ascOfch;
+                        output.append(chanGed);
+                    }
+                }
+            }
+            return output.toString();
+        }
 
     /*
     If you have implemented all the previous parts completely and correctly
